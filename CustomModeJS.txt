@@ -18,11 +18,7 @@ foo.appendChild(downldBtn);
 function downloadInnerHtml(filename, elId, mimeType) {
 if (navigator.userAgent.search("Chrome") >=0){
  var elHtml = document.getElementById(elId).innerText;
- var link = document.createElement('a');
-    mimeType = mimeType || 'text/plain';
-    link.setAttribute('download', filename);
-    link.setAttribute('href', 'data:' + mimeType + ';charset=utf-8,' + encodeURIComponent(elHtml));
-    link.click(); 
+ window.open('data:application/vnd.ms-excel,' + encodeURIComponent(elHtml));
 }
 else if (navigator.userAgent.search("Firefox") >= 0){
      var elHtml = document.getElementById(elId).innerHTML;
@@ -30,7 +26,7 @@ else if (navigator.userAgent.search("Firefox") >= 0){
 }
   else if (navigator.userAgent.search("MSIE") >= 0){
   var elHtml = document.getElementById(elId).innerHTML;
-window.prompt("Copy to clipboard: Ctrl+C, and Paste in Excel", elHtml); 
+window.prompt("Copy to clipboard: Ctrl+C(Copy), and Ctrl+V(Paste) in Excel", elHtml); 
 }  
 }
 }
