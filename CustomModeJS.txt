@@ -1,0 +1,38 @@
+javascript:(function(){
+alert("Custom Mode Enabled");
+document.getElementById('ruleTableBody').onmouseover=function(){
+if(document.querySelectorAll('#overCap #downloadLink').length<1) {
+var downldBtn = document.createElement("a");
+downldBtn.innerHTML = "Download Table";
+downldBtn.style.cursor= "pointer";
+downldBtn.style.color= "black";
+downldBtn.style.background="white";
+downldBtn.style.borderStyle = "solid";
+downldBtn.style.borderWidth = "2px";
+downldBtn.style.padding="2px";
+downldBtn.style.float="right";
+downldBtn.setAttribute("id","downloadLink");
+downldBtn.onclick = function() { downloadInnerHtml('table.html','overDiv','text/html')};
+var foo = document.getElementById("overCap");
+foo.appendChild(downldBtn);
+function downloadInnerHtml(filename, elId, mimeType) {
+if (navigator.userAgent.search("Chrome") >=0){
+ var elHtml = document.getElementById(elId).innerText;
+ var link = document.createElement('a');
+    mimeType = mimeType || 'text/plain';
+    link.setAttribute('download', filename);
+    link.setAttribute('href', 'data:' + mimeType + ';charset=utf-8,' + encodeURIComponent(elHtml));
+    link.click(); 
+}
+else if (navigator.userAgent.search("Firefox") >= 0){
+     var elHtml = document.getElementById(elId).innerHTML;
+       window.open('data:application/vnd.ms-excel,' + encodeURIComponent(elHtml));
+}
+  else if (navigator.userAgent.search("MSIE") >= 0){
+  var elHtml = document.getElementById(elId).innerHTML;
+window.prompt("Copy to clipboard: Ctrl+C, and Paste in Excel", elHtml); 
+}  
+}
+}
+}
+ })();
